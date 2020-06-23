@@ -29,21 +29,21 @@ class GrafanaShare67X < Formula
 
       bin.install "bin/darwin-amd64/grafana-cli"
       bin.install "bin/darwin-amd64/grafana-server"
-      (etc/"grafana").mkpath
+      (etc/"grafana-share-6.7.x").mkpath
       cp("conf/sample.ini", "conf/grafana.ini.example")
-      etc.install "conf/sample.ini" => "grafana/grafana.ini"
-      etc.install "conf/grafana.ini.example" => "grafana/grafana.ini.example"
+      etc.install "conf/sample.ini" => "grafana-share-6.7.x/grafana.ini"
+      etc.install "conf/grafana.ini.example" => "grafana-share-6.7.x/grafana.ini.example"
       pkgshare.install "conf", "public", "tools"
       prefix.install_metafiles
     end
   end
 
   def post_install
-    (var/"log/grafana").mkpath
-    (var/"lib/grafana/plugins").mkpath
+    (var/"log/grafana-share-6.7.x").mkpath
+    (var/"lib/grafana-share-6.7.x/plugins").mkpath
   end
 
-  plist_options :manual => "grafana-server --config=#{HOMEBREW_PREFIX}/etc/grafana/grafana.ini --homepath #{HOMEBREW_PREFIX}/share/grafana --packaging=brew cfg:default.paths.logs=#{HOMEBREW_PREFIX}/var/log/grafana cfg:default.paths.data=#{HOMEBREW_PREFIX}/var/lib/grafana cfg:default.paths.plugins=#{HOMEBREW_PREFIX}/var/lib/grafana/plugins"
+  plist_options :manual => "grafana-server --config=#{HOMEBREW_PREFIX}/etc/grafana-share-6.7.x/grafana.ini --homepath #{HOMEBREW_PREFIX}/share/grafana-share-6.7.x --packaging=brew cfg:default.paths.logs=#{HOMEBREW_PREFIX}/var/log/grafana-share-6.7.x cfg:default.paths.data=#{HOMEBREW_PREFIX}/var/lib/grafana-share-6.7.x cfg:default.paths.plugins=#{HOMEBREW_PREFIX}/var/lib/grafana-share-6.7.x/plugins"
 
   def plist
     <<~EOS
